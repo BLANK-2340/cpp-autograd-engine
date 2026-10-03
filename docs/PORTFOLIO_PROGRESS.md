@@ -32,8 +32,9 @@ No repository AGENTS.md or open PRs were present when inspected.
   seed 2026 = 0.000388960. Every seed gives 4/4 correct truth-table outputs.
 - `bash -n scripts/check.sh` and `git diff --check`: passed.
 - CMake is unavailable locally, so local CMake/CTest execution is pending.
-  CI includes CMake/CTest and sanitizers with leak detection enabled; this is
-  configuration, not a claim that remote CI has already passed.
+  Remote CI subsequently passed strict GCC checks, CMake/CTest and
+  AddressSanitizer/UndefinedBehaviorSanitizer with leak detection enabled.
+  Verified run: https://github.com/BLANK-2340/cpp-autograd-engine/actions/runs/37136598220
 - No CUDA compiler or NVIDIA runtime utilities were available in this environment.
   No GPU measurements or validation were performed.
 
@@ -52,6 +53,12 @@ Actual default-branch commit reads for the October 3 Kolkata date window
 accessible repositories before this publication. October 3 is Saturday, so the
 Monday-Friday minimum is not required today. No missing earlier-day activity is
 backdated. No additional automation was created or changed in this run.
+
+Implementation published and verified on main:
+https://github.com/BLANK-2340/cpp-autograd-engine/commit/3b422dcd893ddfd1d8eddf91814c0129b5f22012
+Its remote tree exactly matched the locally tested index and working files.
+One substantive, tested, published implementation commit is complete for today.
+This follow-up note records the now-confirmed remote CI result.
 
 ### Next concrete milestone
 
