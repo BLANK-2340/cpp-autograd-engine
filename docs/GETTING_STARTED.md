@@ -53,10 +53,12 @@ boundaries, invalid domains, tape isolation and a 100000-operation chain.
 
 ## Limitations and next milestone
 
-CPU scalar arithmetic only; no tensors, optimizer, MLP, GPU or performance claims.
+CPU scalar arithmetic only; no tensors, GPU or performance claims.
 Floating-point overflow/underflow follows standard double arithmetic. A tape stores
 all forward nodes until destruction and is intended for bounded graphs.
 
-Next: deterministic neuron/MLP parameter handling and a tested XOR training demo.
+The deterministic MLP, SGD and XOR extension is now available. See
+[MLP_AND_XOR.md](MLP_AND_XOR.md) for its architecture, checks and actual results,
+and [PORTFOLIO_PROGRESS.md](PORTFOLIO_PROGRESS.md) for the next milestone.
 The existing root README is preserved; this document is the entry point for the
 new implementation.

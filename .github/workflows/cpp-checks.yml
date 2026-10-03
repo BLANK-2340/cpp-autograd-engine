@@ -1,0 +1,24 @@
+name: C++ correctness
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Strict GCC builds and executable checks
+        run: bash scripts/check.sh
+      - name: CMake and CTest
+        run: |
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --parallel 2
+          ctest --test-dir build --output-on-failure
+      - name: Address and undefined behavior sanitizers
+        env:
+          SANITIZE: "1"
+          ASAN_OPTIONS: detect_leaks=1
+          UBSAN_OPTIONS: halt_on_error=1
+        run: bash scripts/check.sh
