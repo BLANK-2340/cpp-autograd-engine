@@ -11,8 +11,10 @@ else
     flags+=(-O2)
 fi
 "$compiler" --version
-for source in tests/scalar_test.cpp tests/mlp_test.cpp examples/scalar_demo.cpp examples/xor_demo.cpp; do
+for source in tests/scalar_test.cpp tests/mlp_test.cpp tests/model_io_test.cpp \
+              examples/scalar_demo.cpp examples/xor_demo.cpp examples/model_io_demo.cpp; do
     executable="$check_build/$(basename "${source%.cpp}")"
     "$compiler" "${flags[@]}" "$source" -o "$executable"
     "$executable"
 done
+

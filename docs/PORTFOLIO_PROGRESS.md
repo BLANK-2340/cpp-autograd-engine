@@ -82,3 +82,46 @@ small reproducibility extension before starting tensor operations.
 - October 29-31: showcase index of actual links, commands, checks and limitations.
 
 These remain targets; unimplemented tracks are not reported as complete.
+
+
+## October 6, 2026 (Asia/Kolkata)
+
+Source of truth before this session: main at
+`d961b74fca5b4614f43eb20bd447a2eb714e8756`. One earlier October 6
+portfolio commit was already published in `cuda-kernel-lab`; no open pull
+requests were present in this repository.
+
+### Completed in this session
+
+- Added dependency-free, versioned MLP serialization in
+  `include/autograd/model_io.hpp` with stream and string APIs.
+- The canonical text format records architecture and every numeric parameter
+  using the classic locale and `max_digits10` scientific notation.
+- Loading validates the magic header, version, architecture, exact parameter
+  count, finite values, truncation, trailing data and resource limits before
+  constructing the returned model.
+- Added exact parameter/architecture round trips (including negative zero,
+  denormals and extreme finite values), prediction preservation, canonical
+  reserialization, malformed-input rejection and a runnable demo.
+- Extended CMake/CTest and the strict GCC/sanitizer check script.
+
+### Actual local verification
+
+- `bash scripts/check.sh`: passed under GCC 13.3 with C++17, `-O2`,
+  `-Wall -Wextra -Werror -pedantic`; all three tests and all three demos passed.
+- `ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 SANITIZE=1 bash scripts/check.sh`:
+  passed AddressSanitizer and UndefinedBehaviorSanitizer. Leak detection was
+  disabled locally because process inspection is blocked; no local leak result
+  is claimed.
+- The model-I/O test passed exact round trips, prediction preservation, stream
+  APIs and malformed/oversized input rejection.
+- CMake/CTest was unavailable locally and remains delegated to CI.
+
+### Next concrete milestone
+
+Rotate to `VisionTrack-NN` for deterministic model serialization and PGM
+input/inference, with exact round-trip and malformed-input tests. CUDA vector-add
+and reduction still require actual NVCC/GPU/compute-sanitizer validation before
+any GPU performance result can be published. After that, add tiled matrix
+multiplication with CPU-oracle boundary tests.
+

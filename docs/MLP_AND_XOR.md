@@ -96,6 +96,9 @@ updates, snapshot behavior, initialization, bad dimensions, cross-tape inputs,
 nonfinite gradients and atomic failure handling. XOR must reach MSE below 0.01 and
 4/4 correct outputs for each registered seed. Original scalar checks still run.
 
-CPU scalar graphs only; no tensors, minibatch loader, optimizer state or model
-serialization. Memory grows with a batch's graph until its tape is destroyed.
-The API is educational and does not offer production training throughput.
+CPU scalar graphs only; no tensors, minibatch loader or optimizer state. Numeric
+model serialization is available in [MODEL_IO.md](MODEL_IO.md); it intentionally
+does not persist gradients or optimizer state. Memory grows with a batch's graph
+until its tape is destroyed. The API is educational and does not offer production
+training throughput.
+
