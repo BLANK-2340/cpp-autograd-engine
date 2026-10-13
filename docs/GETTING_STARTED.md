@@ -60,6 +60,7 @@ all forward nodes until destruction and is intended for bounded graphs.
 The deterministic MLP, SGD and XOR extension is now available. See
 [MLP_AND_XOR.md](MLP_AND_XOR.md) for its architecture, checks and actual results,
 the versioned persistence format is documented in [MODEL_IO.md](MODEL_IO.md),
+the dense tensor layer is documented in [TENSORS.md](TENSORS.md),
 and [PORTFOLIO_PROGRESS.md](PORTFOLIO_PROGRESS.md) tracks the next milestone.
 The existing root README is preserved; this document is the entry point for the
 new implementation.
