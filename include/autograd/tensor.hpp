@@ -2,6 +2,7 @@
 
 #include "autograd/scalar.hpp"
 
+#include <cmath>
 #include <cstddef>
 #include <limits>
 #include <stdexcept>
@@ -173,6 +174,83 @@ inline Scalar sum(const Tensor& input) {
 inline Scalar mean(const Tensor& input) {
     if (input.empty()) throw std::domain_error("Mean requires a non-empty tensor");
     return sum(input) / input.tape().scalar(static_cast<double>(input.size()));
+}
+
+inline void require_classification_logits(const Tensor& logits) {
+    if (logits.rank() != 2)
+        throw std::invalid_argument("Classification logits must be rank 2");
+    if (logits.shape()[1] == 0)
+        throw std::domain_error("Classification logits require at least one class");
+    for (std::size_t index = 0; index < logits.size(); ++index) {
+        if (!std::isfinite(logits[index].value()))
+            throw std::domain_error("Classification logits must be finite");
+    }
+}
+
+// Normalizes every matrix row independently. Subtracting the row maximum as a
+// constant keeps exponent arguments non-positive without changing softmax or
+// its derivatives.
+inline Tensor softmax_rows(const Tensor& logits) {
+    require_classification_logits(logits);
+    const std::size_t rows = logits.shape()[0];
+    const std::size_t columns = logits.shape()[1];
+    std::vector<Scalar> probabilities;
+    probabilities.reserve(logits.size());
+
+    for (std::size_t row = 0; row < rows; ++row) {
+        double maximum = logits.at(row, 0).value();
+        for (std::size_t column = 1; column < columns; ++column) {
+            const double value = logits.at(row, column).value();
+            if (value > maximum) maximum = value;
+        }
+        const Scalar shift = logits.tape().scalar(maximum);
+        std::vector<Scalar> exponentials;
+        exponentials.reserve(columns);
+        Scalar denominator = logits.tape().scalar(0.0);
+        for (std::size_t column = 0; column < columns; ++column) {
+            const Scalar exponential = autograd::exp(logits.at(row, column) - shift);
+            exponentials.push_back(exponential);
+            denominator = denominator + exponential;
+        }
+        for (const Scalar exponential : exponentials)
+            probabilities.push_back(exponential / denominator);
+    }
+    return Tensor::from_scalars(logits.tape(), logits.shape(),
+                                std::move(probabilities));
+}
+
+// Mean sparse categorical cross-entropy. This fused log-sum-exp form remains
+// finite for extreme finite logits and avoids materializing log(softmax).
+inline Scalar cross_entropy(const Tensor& logits,
+                            const std::vector<std::size_t>& targets) {
+    require_classification_logits(logits);
+    const std::size_t rows = logits.shape()[0];
+    const std::size_t columns = logits.shape()[1];
+    if (rows == 0)
+        throw std::domain_error("Cross-entropy requires at least one example");
+    if (targets.size() != rows)
+        throw std::invalid_argument("Cross-entropy target count differs from rows");
+    for (const std::size_t target : targets) {
+        if (target >= columns)
+            throw std::out_of_range("Cross-entropy target is outside class range");
+    }
+
+    Scalar total = logits.tape().scalar(0.0);
+    for (std::size_t row = 0; row < rows; ++row) {
+        double maximum = logits.at(row, 0).value();
+        for (std::size_t column = 1; column < columns; ++column) {
+            const double value = logits.at(row, column).value();
+            if (value > maximum) maximum = value;
+        }
+        const Scalar shift = logits.tape().scalar(maximum);
+        Scalar denominator = logits.tape().scalar(0.0);
+        for (std::size_t column = 0; column < columns; ++column)
+            denominator = denominator +
+                          autograd::exp(logits.at(row, column) - shift);
+        total = total + autograd::log(denominator) -
+                (logits.at(row, targets[row]) - shift);
+    }
+    return total / logits.tape().scalar(static_cast<double>(rows));
 }
 
 } // namespace autograd

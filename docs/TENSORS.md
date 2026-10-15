@@ -12,6 +12,8 @@ tensor libraries.
 - Elementwise tanh and ReLU.
 - Rank-2 matrix multiplication, including zero inner dimensions.
 - Sum and non-empty mean reductions.
+- Numerically stable row-wise softmax and mean sparse categorical
+  cross-entropy for rank-2 classification logits.
 - Numeric value and leaf-gradient extraction for tests and optimizers.
 
 Every tensor element is an existing `Scalar` handle. Operations append ordinary
@@ -26,11 +28,21 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build
 ctest --test-dir build --output-on-failure
 ./build/tensor_demo
+./build/classification_demo
 ```
 
 The tensor test checks a known 2×3 by 3×2 product, empty inner dimensions,
 elementwise repeated operands, validation paths and all 16 input/weight/bias
 gradients of a `mean(tanh(XW + B)^2)` graph against central finite differences.
+The classification test checks probability normalization, shift invariance,
+extreme finite logits, analytic gradients and all six logit gradients against
+central finite differences.
+
+Softmax and cross-entropy subtract each row's maximum before exponentiation.
+Cross-entropy uses a fused log-sum-exp expression instead of `log(softmax)`, so
+large finite logits do not overflow and very unlikely target classes do not
+become `log(0)`. Non-finite logits and invalid/empty classification domains are
+rejected explicitly.
 
 ## Contract and limitations
 

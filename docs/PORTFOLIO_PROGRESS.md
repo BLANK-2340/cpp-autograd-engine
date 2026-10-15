@@ -1,5 +1,43 @@
 # Portfolio continuity
 
+## October 15, 2026 (Asia/Kolkata)
+
+Source of truth before this session: main at
+`1d87ea170a57fb6ff7ce6bfcc4655af105aff7c2`. The scalar, MLP/XOR, model-I/O
+and initial tensor milestones were complete; the working tree was clean and no
+open pull requests were present.
+
+### Completed in this session
+
+- Added numerically stable row-wise softmax and mean sparse categorical
+  cross-entropy for rank-2 logits, using row-maximum shifting and a fused
+  log-sum-exp loss.
+- Added explicit rank, class-count, target-count, target-range and finite-logit
+  validation.
+- Added probability, extreme-logit, shift-invariance, analytic-gradient and six
+  central finite-difference gradient checks plus a runnable classification demo.
+- Extended the established direct GCC, sanitizer, CMake/CTest and tensor
+  documentation paths.
+
+### Actual local verification and limitations
+
+- `bash scripts/check.sh`: passed under GCC 13.3 with C++17, `-O2` and strict
+  warnings; all five tests and five demos passed.
+- `ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 SANITIZE=1 bash scripts/check.sh`:
+  passed AddressSanitizer and UndefinedBehaviorSanitizer. Leak detection was
+  disabled locally because process inspection is blocked; no local leak result
+  is claimed.
+- `git diff --check` and `bash -n scripts/check.sh`: passed before publication.
+- CMake is unavailable locally, so CMake/CTest remains delegated to CI. Tensors
+  remain educational dense CPU graph views; no performance result is claimed.
+
+### Next concrete milestone
+
+Add checked rank-2 row broadcasting so a learned bias vector can be applied to
+a batch without manually materializing it, with repeated-use and
+finite-difference gradient tests. Then build a tiny deterministic multiclass
+training example over synthetic data using the stable loss.
+
 ## October 3, 2026 (Asia/Kolkata)
 
 Source of truth before this session: main at
