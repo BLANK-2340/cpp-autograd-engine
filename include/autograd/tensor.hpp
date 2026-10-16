@@ -122,6 +122,26 @@ inline Tensor operator*(const Tensor& lhs, const Tensor& rhs) {
     return Tensor::from_scalars(lhs.tape(), lhs.shape(), std::move(result));
 }
 
+// Adds one rank-1 row to every row of a rank-2 matrix. Keeping broadcasting
+// explicit avoids hidden shape rules while allowing shared bias gradients to
+// accumulate naturally through the scalar tape.
+inline Tensor add_rowwise(const Tensor& matrix, const Tensor& row) {
+    if (&matrix.tape() != &row.tape())
+        throw std::invalid_argument("Tensors belong to different tapes");
+    if (matrix.rank() != 2 || row.rank() != 1)
+        throw std::invalid_argument("Row-wise addition requires a matrix and a vector");
+    if (matrix.shape()[1] != row.shape()[0])
+        throw std::invalid_argument("Row width differs from matrix columns");
+
+    std::vector<Scalar> result;
+    result.reserve(matrix.size());
+    for (std::size_t matrix_row = 0; matrix_row < matrix.shape()[0]; ++matrix_row) {
+        for (std::size_t column = 0; column < matrix.shape()[1]; ++column)
+            result.push_back(matrix.at(matrix_row, column) + row[column]);
+    }
+    return Tensor::from_scalars(matrix.tape(), matrix.shape(), std::move(result));
+}
+
 inline Tensor tanh(const Tensor& input) {
     std::vector<Scalar> result;
     result.reserve(input.size());

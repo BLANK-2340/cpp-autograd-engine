@@ -13,6 +13,7 @@ fi
 "$compiler" --version
 for source in tests/scalar_test.cpp tests/mlp_test.cpp tests/model_io_test.cpp \
               tests/tensor_test.cpp tests/classification_test.cpp \
+              tests/broadcast_test.cpp \
               examples/scalar_demo.cpp examples/xor_demo.cpp \
               examples/model_io_demo.cpp examples/tensor_demo.cpp \
               examples/classification_demo.cpp; do

@@ -1,5 +1,43 @@
 # Portfolio continuity
 
+## October 16, 2026 (Asia/Kolkata)
+
+Source of truth before this session: main at
+`550417784d61982fc054c16f590a229a5ce1f995`. Stable tensor softmax and
+cross-entropy were complete; no open pull requests or commits in today's
+Kolkata date window were present.
+
+### Completed in this session
+
+- Added explicit rank-2 matrix plus rank-1 row broadcasting for shared bias
+  vectors while retaining strict shape rules elsewhere.
+- Added forward-value, empty-dimension, cross-tape, rank and width validation,
+  repeated-backward and nine central finite-difference gradient checks.
+- Verified that each bias gradient equals the accumulated gradients from every
+  matrix row, exercising shared-path behavior through the scalar tape.
+- Updated the classification demo to apply and differentiate a shared bias, and
+  extended CMake, direct compiler, sanitizer and architecture documentation.
+
+### Validation and limitations
+
+- `bash scripts/check.sh`: passed under GCC 13.3 with C++17, `-O2` and strict
+  warnings; all six tests and five demos passed.
+- `ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 SANITIZE=1 bash scripts/check.sh`:
+  passed AddressSanitizer and UndefinedBehaviorSanitizer. Leak detection was
+  disabled locally because process inspection is blocked; no local leak result
+  is claimed.
+- `git diff --check` and `bash -n scripts/check.sh`: passed before publication.
+  CMake/CTest is unavailable locally and remains delegated to CI.
+- Broadcasting remains deliberately explicit and limited to one row vector.
+  General NumPy-style rules, batching, mutation and performance claims are out
+  of scope for this educational layer.
+
+### Next concrete milestone
+
+Build a deterministic three-class synthetic training demo from matrix multiply,
+row-wise bias, stable cross-entropy and atomic parameter updates. Add convergence,
+repeatability and finite-prediction checks without claiming benchmark performance.
+
 ## October 15, 2026 (Asia/Kolkata)
 
 Source of truth before this session: main at

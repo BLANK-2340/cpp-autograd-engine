@@ -9,6 +9,7 @@ tensor libraries.
 
 - Dense row-major tensors with rank 1–8 and checked resource limits.
 - Same-shape elementwise addition and multiplication.
+- Explicit rank-2 matrix plus rank-1 row broadcasting for shared bias vectors.
 - Elementwise tanh and ReLU.
 - Rank-2 matrix multiplication, including zero inner dimensions.
 - Sum and non-empty mean reductions.
@@ -37,6 +38,10 @@ gradients of a `mean(tanh(XW + B)^2)` graph against central finite differences.
 The classification test checks probability normalization, shift invariance,
 extreme finite logits, analytic gradients and all six logit gradients against
 central finite differences.
+The broadcasting test checks forward shapes and values, empty dimensions,
+validation, repeated backward calls and all nine matrix/bias gradients against
+central finite differences. Bias gradients are also checked against the sum of
+the corresponding per-row gradients.
 
 Softmax and cross-entropy subtract each row's maximum before exponentiation.
 Cross-entropy uses a fused log-sum-exp expression instead of `log(softmax)`, so
@@ -46,8 +51,9 @@ rejected explicitly.
 
 ## Contract and limitations
 
-Tensors are non-owning graph views: their `Tape` must outlive them. Operations do
-not broadcast, mutate in place, build batched matrix products or support strides.
+Tensors are non-owning graph views: their `Tape` must outlive them. Broadcasting
+is limited to the explicit `add_rowwise(matrix, row)` operation; operations do
+not otherwise broadcast, mutate in place, build batched matrix products or support strides.
 Matrix multiplication expands into scalar nodes, favoring clarity over speed.
 Shapes are limited to eight dimensions and one million elements; these limits do
 not bound total tape nodes created by a long expression. CPU `double` arithmetic
