@@ -1,5 +1,46 @@
 # Portfolio continuity
 
+## October 16, 2026 — multiclass continuation (Asia/Kolkata)
+
+Started from main `90b4c001a336cc9ffc78fdac658ef57689b0c81a`, after the
+row-broadcasting milestone. The six accessible allowlisted repositories had one
+commit in today's Kolkata window, the broadcasting commit; no open PRs existed
+in this repository. The original README and pre-delegation files remain intact.
+
+### Completed
+
+- Added a complete deterministic synthetic three-class linear classifier:
+  tensor matrix multiplication, shared bias, stable cross-entropy, gradient
+  extraction, numeric updates and a fresh tape per full batch.
+- Added atomic numeric `sgd_step`, validating complete candidates before any
+  parameter mutation, without changing the established MLP API.
+- Added convergence, exact same-build repeatability, disjoint holdout, finite
+  prediction and update-failure/aliasing tests, plus CMake/direct-check targets.
+- Added architecture, runnable commands and explicitly synthetic measured results
+  in `docs/MULTICLASS.md`.
+
+### Checks and limitations
+
+- Strict GCC 13.3 execution passed the existing suite and new convergence/demo
+  checks. Initial loss was 1.098612289 and final training loss was 0.009116757;
+  training accuracy was 12/12 and synthetic holdout accuracy was 6/6.
+- Final `bash scripts/check.sh`: passed all seven tests and six demos with
+  C++17, `-O2`, `-Wall -Wextra -Werror -pedantic`.
+- `SANITIZE=1 ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 bash scripts/check.sh`:
+  passed ASan/UBSan for all thirteen executables. Local leak detection was
+  disabled; no leak-check result is claimed. Shell syntax and diff checks passed.
+- CMake/CTest is not installed locally; remote CI remains unconfirmed until a
+  workflow run can actually be retrieved.
+- These deliberately separated fixed points are a teaching example, not evidence
+  of external-data accuracy or performance. No GPU validation was performed.
+
+### Next concrete milestone
+
+Rotate to `VisionTrack-NN`: inspect the current spatial Fashion-MNIST comparison,
+then add multi-seed evaluation under the identical manifest and preprocessing,
+with per-seed reports and an aggregate that preserves calibration limitations.
+Only publish measured results after actually running the experiment.
+
 ## October 16, 2026 (Asia/Kolkata)
 
 Source of truth before this session: main at

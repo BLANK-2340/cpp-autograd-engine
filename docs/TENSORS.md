@@ -30,7 +30,11 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ./build/tensor_demo
 ./build/classification_demo
+./build/multiclass_demo
 ```
+
+For an end-to-end training example with atomic numeric updates and a disjoint
+synthetic holdout, see [MULTICLASS.md](MULTICLASS.md).
 
 The tensor test checks a known 2×3 by 3×2 product, empty inner dimensions,
 elementwise repeated operands, validation paths and all 16 input/weight/bias
