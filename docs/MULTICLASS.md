@@ -59,3 +59,6 @@ holdout does not estimate real-world generalization. Exact bitwise reproducibili
 is checked within one build, not promised across different compilers or math
 libraries. There is no throughput, GPU, external-data or competitive accuracy
 claim. The example has fixed dimensions and is not a general classifier API.
+
+The trained numeric weights and biases can be stored with the distinct versioned
+checkpoint API documented in [CLASSIFIER_IO.md](CLASSIFIER_IO.md).

@@ -1,5 +1,42 @@
 # Portfolio continuity
 
+## October 21, 2026 — linear-classifier checkpoint continuation (Asia/Kolkata)
+
+Started from main `75f0673e7998598c5b014d92157a297fe57124b6`. The
+multiclass tensor training milestone was complete, no open pull requests existed
+and no allowlisted repository had a commit in today's Kolkata window. The MLP
+serializer remains unchanged; this checkpoint covers the distinct tensor linear
+classifier.
+
+### Completed
+
+- Added a dependency-free versioned checkpoint for dense multiclass linear
+  classifiers: input width, class count, row-major weights and class biases.
+- Added canonical, locale-independent exact-double output and stream/string APIs,
+  with dimension, overflow, finite-value, truncation and trailing-data checks.
+- Added exact-value and negative-zero round trips, trained-prediction preservation,
+  malformed/oversized input tests and a runnable train-save-load-evaluate demo.
+
+### Checks and limitations
+
+- `bash scripts/check.sh`: passed all eight tests and seven demos under GCC 13.3
+  with C++17, `-O2`, strict warnings and pedantic checks. The restored checkpoint
+  retained 6/6 synthetic holdout accuracy and identical probabilities.
+- `SANITIZE=1 ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 bash
+  scripts/check.sh`: passed AddressSanitizer and UndefinedBehaviorSanitizer for
+  all fifteen executables. Local leak detection was disabled; no leak-check
+  result is claimed. CMake/CTest could not run because CMake is unavailable.
+- The format intentionally excludes graphs, gradients, optimizer state,
+  checksums and atomic filesystem replacement. It is an educational checkpoint,
+  not a general interchange or hostile-input sandbox.
+
+### Next concrete milestone
+
+Add deterministic resume-training verification: checkpoint an intermediate
+classifier, reload it, continue with an explicit training-state API and prove it
+matches uninterrupted training without silently persisting tape or optimizer
+state.
+
 ## October 16, 2026 — multiclass continuation (Asia/Kolkata)
 
 Started from main `90b4c001a336cc9ffc78fdac658ef57689b0c81a`, after the
