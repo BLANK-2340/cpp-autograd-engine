@@ -1,5 +1,40 @@
 # Portfolio continuity
 
+## October 22, 2026 — clean-archive showcase continuation (Asia/Kolkata)
+
+Started from main `eced76e06f10be5c38763529b6e24c61505fb764` after the
+exact resume milestone. One of today's two planned commits was already published,
+and no open pull requests existed.
+
+### Completed
+
+- Added a one-command clean-archive verifier that exports the selected commit to
+  a temporary directory and runs the entire strict suite without untracked files
+  or an existing build tree.
+- Added a concise showcase index covering setup, runnable targets, independent
+  checks, actual observed results, milestone links and explicit limitations.
+- Linked the showcase from the established getting-started entry point while
+  preserving the original root README.
+
+### Checks and limitations
+
+- `bash scripts/check.sh`: passed all eight tests and seven demos under GCC 13.3
+  with C++17, `-O2`, strict warnings and pedantic checks.
+- `SANITIZE=1 ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 bash
+  scripts/check.sh`: passed AddressSanitizer and UndefinedBehaviorSanitizer for
+  all fifteen executables. Leak detection was disabled; no leak-check result is
+  claimed.
+- `bash scripts/verify_clean_checkout.sh`: passed all eight tests and seven demos
+  from the committed `git archive` in a new temporary directory.
+- The index intentionally makes no GPU, throughput, external-dataset or
+  cross-toolchain bitwise-reproducibility claim.
+
+### Next concrete milestone
+
+Rotate to `VisionTrack-NN` for clean-checkout installation verification and a
+similarly concise index that separates measured Fashion-MNIST subset results
+from pending full-dataset validation.
+
 ## October 22, 2026 — exact checkpoint-resume continuation (Asia/Kolkata)
 
 Started from main `7193a528907ed735bdb4030bc3970eb48c164da1`. The

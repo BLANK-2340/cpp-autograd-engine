@@ -58,6 +58,7 @@ Floating-point overflow/underflow follows standard double arithmetic. A tape sto
 all forward nodes until destruction and is intended for bounded graphs.
 
 The deterministic MLP, SGD and XOR extension is now available. See
+[SHOWCASE.md](SHOWCASE.md) for the concise verification and results index,
 [MLP_AND_XOR.md](MLP_AND_XOR.md) for its architecture, checks and actual results,
 the versioned persistence format is documented in [MODEL_IO.md](MODEL_IO.md),
 the dense tensor layer is documented in [TENSORS.md](TENSORS.md),
