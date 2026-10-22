@@ -1,5 +1,40 @@
 # Portfolio continuity
 
+## October 22, 2026 — exact checkpoint-resume continuation (Asia/Kolkata)
+
+Started from main `7193a528907ed735bdb4030bc3970eb48c164da1`. The
+versioned linear-classifier checkpoint was complete, no open pull requests
+existed and no allowlisted repository had a commit in today's Kolkata window.
+
+### Completed
+
+- Added validated continuation from explicit numeric classifier parameters while
+  preserving the default zero-initialized training API.
+- Proved that 120 steps, an exact checkpoint round trip and 180 resumed steps
+  produce the same parameters and full loss trajectory as 300 uninterrupted
+  steps in the same build.
+- Extended the runnable checkpoint demo and documentation to distinguish this
+  stateless-SGD contract from persistence of optimizer or tape state.
+
+### Checks and limitations
+
+- `bash scripts/check.sh`: passed all eight tests and seven demos under GCC 13.3
+  with C++17, `-O2`, strict warnings and pedantic checks. The resume demo reported
+  `resume_exact=yes` and retained 6/6 synthetic holdout accuracy.
+- `SANITIZE=1 ASAN_OPTIONS=detect_leaks=0 UBSAN_OPTIONS=halt_on_error=1 bash
+  scripts/check.sh`: passed AddressSanitizer and UndefinedBehaviorSanitizer for
+  all fifteen executables. Leak detection was disabled; no leak-check result is
+  claimed. CMake/CTest could not run because CMake is unavailable locally.
+- The equivalence claim is intentionally limited to this deterministic full-batch
+  example and same-build double arithmetic. Stateful optimizers would require a
+  separately versioned state format.
+
+### Next concrete milestone
+
+Rotate to repository robustness and showcase readiness: verify installation and
+commands from a clean checkout, then add a concise actual-results index without
+inventing CUDA measurements or external-data claims.
+
 ## October 21, 2026 — linear-classifier checkpoint continuation (Asia/Kolkata)
 
 Started from main `75f0673e7998598c5b014d92157a297fe57124b6`. The

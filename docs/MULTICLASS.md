@@ -62,3 +62,7 @@ claim. The example has fixed dimensions and is not a general classifier API.
 
 The trained numeric weights and biases can be stored with the distinct versioned
 checkpoint API documented in [CLASSIFIER_IO.md](CLASSIFIER_IO.md).
+Training can also continue from validated numeric parameters through
+`multiclass_demo::continue_training`; the checkpoint tests prove that a split
+120+180-step run exactly matches the established uninterrupted 300-step run in
+the same build.

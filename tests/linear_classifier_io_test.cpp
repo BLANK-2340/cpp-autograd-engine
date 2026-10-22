@@ -57,6 +57,32 @@ void trained_prediction_round_trip() {
             "Checkpoint round trip changed classifier predictions");
 }
 
+void exact_resume_training() {
+    const auto uninterrupted = multiclass_demo::train(300, 0.2);
+    const auto first_segment = multiclass_demo::train(120, 0.2);
+    const autograd::LinearClassifierModel checkpoint{2, 3, first_segment.parameters};
+    const auto restored = autograd::deserialize_linear_classifier(
+        autograd::serialize_linear_classifier(checkpoint));
+    const auto second_segment = multiclass_demo::continue_training(
+        restored.parameters, 180, 0.2);
+
+    std::vector<double> resumed_losses = first_segment.losses;
+    resumed_losses.insert(resumed_losses.end(), second_segment.losses.begin() + 1,
+                          second_segment.losses.end());
+    require(second_segment.parameters == uninterrupted.parameters,
+            "Resumed parameters differ from uninterrupted training");
+    require(resumed_losses == uninterrupted.losses,
+            "Resumed loss trajectory differs from uninterrupted training");
+
+    rejects([] { (void)multiclass_demo::continue_training({}, 1); });
+    rejects([] {
+        auto parameters = std::vector<double>(9, 0.0);
+        parameters[3] = std::numeric_limits<double>::quiet_NaN();
+        (void)multiclass_demo::continue_training(parameters, 1);
+    });
+    rejects([] { (void)multiclass_demo::continue_training(std::vector<double>(9), 0); });
+}
+
 void malformed_inputs() {
     const std::vector<std::string> invalid{
         "", "OTHER 1\n", "AUTOGRAD_LINEAR_CLASSIFIER 2\n",
@@ -87,7 +113,8 @@ void malformed_inputs() {
 int main() {
     exact_round_trip();
     trained_prediction_round_trip();
+    exact_resume_training();
     malformed_inputs();
     std::cout << "PASS: exact classifier checkpoint round trips, prediction preservation, "
-                 "and malformed input rejection\n";
+                 "resume equivalence, and malformed input rejection\n";
 }

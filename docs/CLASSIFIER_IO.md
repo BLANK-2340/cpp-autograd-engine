@@ -13,7 +13,19 @@ const auto restored = autograd::deserialize_linear_classifier(checkpoint);
 
 The stream APIs are `save_linear_classifier` and `load_linear_classifier`.
 `linear_classifier_io_demo` trains the synthetic classifier, round-trips it in
-memory and verifies the restored holdout result.
+memory, resumes from the restored numeric parameters and verifies the result.
+
+## Deterministic resume contract
+
+`multiclass_demo::continue_training(parameters, steps, learning_rate)` starts a
+new sequence of fresh per-batch tapes from validated finite numeric parameters.
+For the fixed full-batch experiment, 120 steps, an exact checkpoint round trip
+and another 180 steps produce the same parameters and loss trajectory as 300
+uninterrupted steps in the same build. The test compares both exactly.
+
+The checkpoint does not claim to capture an optimizer: the example uses plain
+stateless SGD with an explicit learning rate. A future optimizer with momentum
+or adaptive statistics would need a separately versioned training-state format.
 
 ## Format and validation
 
