@@ -1,0 +1,50 @@
+{
+  "generated_from": "docs/PORTFOLIO_INDEX.md",
+  "projects": [
+    {
+      "evidence_revision": "32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+      "evidence_url": "https://github.com/BLANK-2340/cpp-autograd-engine/commit/32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+      "id": "cpp-autograd-engine",
+      "limitation": "Scope: dependency-free educational CPU double arithmetic. The synthetic data does not establish real-world generalization, throughput or competitive accuracy.",
+      "recorded_result": "XOR seed 42: MSE 0.000218520 and accuracy 4/4 after 4,000 updates.",
+      "repository": "BLANK-2340/cpp-autograd-engine",
+      "repository_url": "https://github.com/BLANK-2340/cpp-autograd-engine",
+      "showcase_url": "https://github.com/BLANK-2340/cpp-autograd-engine/blob/main/docs/SHOWCASE.md",
+      "verify_command": "bash scripts/verify_clean_checkout.sh"
+    },
+    {
+      "evidence_revision": "12674754043ee6e7b097a549078736b5f913be01",
+      "evidence_url": "https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01",
+      "id": "visiontrack-nn",
+      "limitation": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets.",
+      "recorded_result": "Three-seed spatial Fashion-MNIST subset suite: mean accuracy 72.67%, sample standard deviation 0.70 percentage points, mean macro F1 0.723750.",
+      "repository": "BLANK-2340/VisionTrack-NN",
+      "repository_url": "https://github.com/BLANK-2340/VisionTrack-NN",
+      "showcase_url": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md",
+      "verify_command": "./scripts/verify_showcase.sh"
+    },
+    {
+      "evidence_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "evidence_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "id": "cuda-kernel-lab",
+      "limitation": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups.",
+      "recorded_result": "Reduction: 0.045291 +/- 0.000868 ms allocating and 0.043788 +/- 0.000862 ms preallocated.",
+      "repository": "BLANK-2340/cuda-kernel-lab",
+      "repository_url": "https://github.com/BLANK-2340/cuda-kernel-lab",
+      "showcase_url": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md",
+      "verify_command": "./scripts/verify_showcase.sh"
+    },
+    {
+      "evidence_revision": "24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+      "evidence_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/commit/24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+      "id": "pendulum-wave-simulation",
+      "limitation": "Scope: the fine-step trajectory is a numerical reference, not an analytical solution.",
+      "recorded_result": "Four-second final-state refinement observed RK4 orders 4.026925, 4.015949 and 4.008923 against a finer numerical reference.",
+      "repository": "BLANK-2340/Pendulum-Wave-simulation",
+      "repository_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation",
+      "showcase_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/blob/main/docs/SHOWCASE.md",
+      "verify_command": "./scripts/verify_showcase.sh"
+    }
+  ],
+  "schema_version": 1
+}

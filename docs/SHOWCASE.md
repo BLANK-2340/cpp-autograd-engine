@@ -10,7 +10,8 @@ For a cross-repository view, see the
 
 ## Verify from a clean archive
 
-Requirements: Git, Bash, `tar`, and a C++17 compiler (`g++` by default).
+Requirements: Git, Bash, `tar`, Python 3, and a C++17 compiler (`g++` by
+default).
 
 ```sh
 git clone https://github.com/BLANK-2340/cpp-autograd-engine.git
@@ -19,8 +20,9 @@ bash scripts/verify_clean_checkout.sh
 ```
 
 The script exports committed files to a temporary directory with `git archive`
-and runs the strict direct-build suite there. This catches accidental dependence
-on untracked files or an existing build directory. Set `CXX` to select another
+and validates the synchronized human/machine portfolio indexes before running
+the strict direct-build suite there. This catches accidental dependence on
+untracked files or an existing build directory. Set `CXX` to select another
 compiler. The regular in-tree command is `bash scripts/check.sh`.
 
 ## Implemented milestones

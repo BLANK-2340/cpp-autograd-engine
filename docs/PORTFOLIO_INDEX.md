@@ -6,6 +6,11 @@ verification command, architecture notes, measured results and explicit limits.
 The revision links below are evidence anchors verified by October 30, 2026;
 `main` may continue to evolve.
 
+The canonical [`portfolio.json`](portfolio.json) companion is checked against
+this page with `python3 scripts/validate_portfolio.py`. The validator enforces a
+strict schema, unique repositories and revisions, exact GitHub URL construction,
+canonical JSON, and synchronized commands, results and limitations.
+
 ## Project map
 
 | Project | Demonstrates | Clean verification | Evidence anchor |
@@ -30,7 +35,7 @@ not depend on untracked files or an existing build directory.
   training accuracy `12/12`, disjoint holdout accuracy `6/6`.
 - Checkpointed 120+180-step continuation exactly matched the uninterrupted
   300-step trajectory in the same build.
-- [Architecture, commands and narrower limits](SHOWCASE.md)
+- [Architecture, commands and narrower limits](https://github.com/BLANK-2340/cpp-autograd-engine/blob/main/docs/SHOWCASE.md)
 
 Scope: dependency-free educational CPU `double` arithmetic. The synthetic data
 does not establish real-world generalization, throughput or competitive accuracy.

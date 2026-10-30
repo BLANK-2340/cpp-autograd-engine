@@ -29,8 +29,9 @@ not an appropriate public portfolio entry point.
 
 ### Next concrete milestone
 
-Add a machine-readable companion index with strict schema, unique repository and
-revision checks, then keep it synchronized with the human-readable portfolio.
+Audit the pinned public evidence URLs and their current CI states read-only, then
+record a dated link-health snapshot without making local verification depend on
+network access.
 
 ## October 22, 2026 — clean-archive showcase continuation (Asia/Kolkata)
 
