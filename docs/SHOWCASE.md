@@ -5,6 +5,9 @@ automatic differentiation to a deterministic MLP and a small dense-tensor
 classification example. The original root README is preserved; this page is the
 concise entry point for the added implementation.
 
+For a cross-repository view, see the
+[verified project portfolio](PORTFOLIO_INDEX.md).
+
 ## Verify from a clean archive
 
 Requirements: Git, Bash, `tar`, and a C++17 compiler (`g++` by default).

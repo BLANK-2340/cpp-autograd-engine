@@ -1,5 +1,37 @@
 # Portfolio continuity
 
+## October 30, 2026 — verified cross-repository index (Asia/Kolkata)
+
+Started from main `32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0` with
+the C++ showcase complete and no open pull requests. The private `txt-file`
+repository was inspected but left unchanged because its existing DINO notes are
+not an appropriate public portfolio entry point.
+
+### Completed
+
+- Added a public cross-repository index covering the four accessible showcase
+  projects, their exact clean-verification commands and evidence-bearing commits.
+- Consolidated only recorded results from each current showcase and kept dataset,
+  benchmark-scope, CUDA, numerical-method and apparatus limitations adjacent to
+  the corresponding claims.
+- Linked the index from this repository's established showcase while preserving
+  the original root README.
+
+### Checks and limitations
+
+- Re-read every linked repository's current showcase and verified each public
+  repository URL and evidence anchor before publication.
+- `bash scripts/verify_clean_checkout.sh`: rerun from the committed archive for
+  all eight tests and seven demos under the established strict C++17 flags.
+- The index does not claim language or paper-reproduction work: the three
+  conditional repositories remain excluded until exact accessibility is
+  confirmed.
+
+### Next concrete milestone
+
+Add a machine-readable companion index with strict schema, unique repository and
+revision checks, then keep it synchronized with the human-readable portfolio.
+
 ## October 22, 2026 — clean-archive showcase continuation (Asia/Kolkata)
 
 Started from main `eced76e06f10be5c38763529b6e24c61505fb764` after the
