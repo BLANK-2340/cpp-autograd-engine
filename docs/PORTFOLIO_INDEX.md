@@ -11,6 +11,11 @@ this page with `python3 scripts/validate_portfolio.py`. The validator enforces a
 strict schema, unique repositories and revisions, exact GitHub URL construction,
 canonical JSON, and synchronized commands, results and limitations.
 
+The dated [evidence-health audit](EVIDENCE_HEALTH.md) records the commit objects,
+current showcase paths and push-triggered CI runs observed on November 2, 2026.
+Its validator is offline; the snapshot never turns normal verification into a
+network-dependent check.
+
 ## Project map
 
 | Project | Demonstrates | Clean verification | Evidence anchor |

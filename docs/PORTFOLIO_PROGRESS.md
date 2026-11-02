@@ -1,5 +1,37 @@
 # Portfolio continuity
 
+## November 2, 2026 — public evidence-health audit (Asia/Kolkata)
+
+Started from main `704b3ada900093a0c22021b699c68372b47a725d` with the
+human and machine-readable cross-repository indexes complete, no open pull
+requests and no earlier portfolio commits in today's Kolkata date window.
+
+### Completed
+
+- Re-read all four pinned public commit objects and current showcase paths.
+- Recorded their exact evidence trees, current showcase blobs and successful
+  push-triggered workflow runs in a canonical dated snapshot.
+- Added an offline validator that cross-checks every identity and revision
+  against `portfolio.json`, reconstructs commit/showcase/CI URLs and rejects
+  malformed trees, mismatched CI heads and altered run identities.
+- Added five adversarial mutations plus clean-archive and CI integration.
+
+### Checks and limitations
+
+- All four evidence anchors and current showcase paths were reachable on
+  November 2, 2026. All four pinned revisions had one completed successful push
+  workflow in GitHub's returned run collection.
+- The committed audit is deliberately a point-in-time observation. Local checks
+  validate its structure and cross-file consistency without making network
+  requests or claiming that future availability is guaranteed.
+- No benchmark, model or simulation result changed in this milestone.
+
+### Next concrete milestone
+
+Add a deterministic repository-level release checklist that verifies each
+showcase entry exposes setup, demo, checks, evidence and limitations without
+duplicating project-specific implementation tests.
+
 ## October 30, 2026 — verified cross-repository index (Asia/Kolkata)
 
 Started from main `32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0` with

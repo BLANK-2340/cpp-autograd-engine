@@ -1,0 +1,83 @@
+{
+  "checked_on": "2026-11-02",
+  "projects": [
+    {
+      "ci": {
+        "completed_at": "2026-10-22T12:15:49Z",
+        "conclusion": "success",
+        "event": "push",
+        "head_revision": "32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+        "run_id": 39776734605,
+        "run_url": "https://github.com/BLANK-2340/cpp-autograd-engine/actions/runs/39776734605",
+        "status": "completed",
+        "workflow_name": "C++ correctness"
+      },
+      "commit_url": "https://github.com/BLANK-2340/cpp-autograd-engine/commit/32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+      "evidence_revision": "32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+      "evidence_tree": "238d9b0396c254d3a14ae712f193925bda5d1273",
+      "project_id": "cpp-autograd-engine",
+      "repository": "BLANK-2340/cpp-autograd-engine",
+      "showcase_blob": "0f641ce705a6bf674c05ca7e4aa376101b70dba1",
+      "showcase_url": "https://github.com/BLANK-2340/cpp-autograd-engine/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "ci": {
+        "completed_at": "2026-10-23T13:55:40Z",
+        "conclusion": "success",
+        "event": "push",
+        "head_revision": "12674754043ee6e7b097a549078736b5f913be01",
+        "run_id": 39965186028,
+        "run_url": "https://github.com/BLANK-2340/VisionTrack-NN/actions/runs/39965186028",
+        "status": "completed",
+        "workflow_name": "Vision baseline"
+      },
+      "commit_url": "https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01",
+      "evidence_revision": "12674754043ee6e7b097a549078736b5f913be01",
+      "evidence_tree": "f8702269a918f694bbdf83a1681ad0610c172eff",
+      "project_id": "visiontrack-nn",
+      "repository": "BLANK-2340/VisionTrack-NN",
+      "showcase_blob": "ebb3d2219c58b2f5707dfa0c8ddc9b1ef385647c",
+      "showcase_url": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "ci": {
+        "completed_at": "2026-10-26T14:07:56Z",
+        "conclusion": "success",
+        "event": "push",
+        "head_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
+        "run_id": 40336689797,
+        "run_url": "https://github.com/BLANK-2340/cuda-kernel-lab/actions/runs/40336689797",
+        "status": "completed",
+        "workflow_name": "CPU references"
+      },
+      "commit_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "evidence_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "evidence_tree": "fbe56670b665d21339bda913e71803f1f023dbe5",
+      "project_id": "cuda-kernel-lab",
+      "repository": "BLANK-2340/cuda-kernel-lab",
+      "showcase_blob": "327b25135dbf77fb8c01616e8936eb639a681202",
+      "showcase_url": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "ci": {
+        "completed_at": "2026-10-29T13:50:18Z",
+        "conclusion": "success",
+        "event": "push",
+        "head_revision": "24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+        "run_id": 40885566434,
+        "run_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/actions/runs/40885566434",
+        "status": "completed",
+        "workflow_name": "Headless physics"
+      },
+      "commit_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/commit/24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+      "evidence_revision": "24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+      "evidence_tree": "e23bb39653b521107325063967f058a793478618",
+      "project_id": "pendulum-wave-simulation",
+      "repository": "BLANK-2340/Pendulum-Wave-simulation",
+      "showcase_blob": "fde0c58bd5fe7d2fe2cb62d7aed665f8c3b34df5",
+      "showcase_url": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/blob/main/docs/SHOWCASE.md"
+    }
+  ],
+  "schema_version": 1,
+  "source": "docs/portfolio.json"
+}
