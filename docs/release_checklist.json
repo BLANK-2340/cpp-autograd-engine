@@ -1,0 +1,45 @@
+{
+  "generated_from": "docs/portfolio.json",
+  "projects": [
+    {
+      "checks": "bash scripts/verify_clean_checkout.sh",
+      "demo": "https://github.com/BLANK-2340/cpp-autograd-engine/blob/main/docs/SHOWCASE.md",
+      "evidence": "https://github.com/BLANK-2340/cpp-autograd-engine/commit/32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0",
+      "id": "cpp-autograd-engine",
+      "limitations": "Scope: dependency-free educational CPU double arithmetic. The synthetic data does not establish real-world generalization, throughput or competitive accuracy.",
+      "setup": "https://github.com/BLANK-2340/cpp-autograd-engine/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "checks": "./scripts/verify_showcase.sh",
+      "demo": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md",
+      "evidence": "https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01",
+      "id": "visiontrack-nn",
+      "limitations": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets.",
+      "setup": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "checks": "./scripts/verify_showcase.sh",
+      "demo": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md",
+      "evidence": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "id": "cuda-kernel-lab",
+      "limitations": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups.",
+      "setup": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md"
+    },
+    {
+      "checks": "./scripts/verify_showcase.sh",
+      "demo": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/blob/main/docs/SHOWCASE.md",
+      "evidence": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/commit/24be3e3b53ff69435bae32c1e4563ab7f8ebb909",
+      "id": "pendulum-wave-simulation",
+      "limitations": "Scope: the fine-step trajectory is a numerical reference, not an analytical solution.",
+      "setup": "https://github.com/BLANK-2340/Pendulum-Wave-simulation/blob/main/docs/SHOWCASE.md"
+    }
+  ],
+  "required_facets": [
+    "setup",
+    "demo",
+    "checks",
+    "evidence",
+    "limitations"
+  ],
+  "schema_version": 1
+}

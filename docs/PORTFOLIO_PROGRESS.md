@@ -1,5 +1,34 @@
 # Portfolio continuity
 
+## November 2, 2026 — release checklist (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`aa07438f32bbb3231cbd8ea4886460aa25e1c551`; the dated evidence-health audit
+was complete, one portfolio commit had already been published today, and no
+open pull requests were present.
+
+### Completed in this session
+
+- Added a canonical release checklist for all four public showcase entries.
+- Cross-validated setup, demo, automated checks, pinned evidence and explicit
+  limitations against `portfolio.json` and a reviewer-facing Markdown table.
+- Added five adversarial mutations and integrated the validator into CI and
+  clean committed-archive verification.
+
+### Validation and limitations
+
+- The checklist is deliberately offline and deterministic. It proves that the
+  release facets are present and synchronized, not that external links remain
+  live or that another repository's checks were rerun in this commit.
+- GPU validation, full-data vision claims and the three inaccessible
+  conditional repositories remain outside the verified portfolio scope.
+
+### Next concrete milestone
+
+Add a concise, machine-readable release summary that binds the latest index,
+health snapshot and checklist validators to one command without duplicating
+their schemas.
+
 ## November 2, 2026 — public evidence-health audit (Asia/Kolkata)
 
 Started from main `704b3ada900093a0c22021b699c68372b47a725d` with the

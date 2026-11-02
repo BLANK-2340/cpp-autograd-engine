@@ -16,6 +16,9 @@ current showcase paths and push-triggered CI runs observed on November 2, 2026.
 Its validator is offline; the snapshot never turns normal verification into a
 network-dependent check.
 
+The [release checklist](RELEASE_CHECKLIST.md) cross-validates that every public
+entry exposes setup, demo, checks, pinned evidence and an adjacent limitation.
+
 ## Project map
 
 | Project | Demonstrates | Clean verification | Evidence anchor |
