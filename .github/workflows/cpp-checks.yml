@@ -11,12 +11,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Validate portfolio index
         run: |
-          python3 scripts/validate_portfolio.py
-          python3 scripts/validate_portfolio.py --self-test
-          python3 scripts/validate_evidence_health.py
-          python3 scripts/validate_evidence_health.py --self-test
-          python3 scripts/validate_release_checklist.py
-          python3 scripts/validate_release_checklist.py --self-test
+          python3 scripts/verify_portfolio_release.py
+          python3 scripts/verify_portfolio_release.py --self-test
       - name: Strict GCC builds and executable checks
         run: bash scripts/check.sh
       - name: CMake and CTest

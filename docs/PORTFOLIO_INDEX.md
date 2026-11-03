@@ -18,6 +18,10 @@ network-dependent check.
 
 The [release checklist](RELEASE_CHECKLIST.md) cross-validates that every public
 entry exposes setup, demo, checks, pinned evidence and an adjacent limitation.
+The canonical [`release_summary.json`](release_summary.json) binds all three
+machine-readable artifacts to their validators and exact SHA-256 digests. Run
+`python3 scripts/verify_portfolio_release.py` for the complete offline release
+check.
 
 ## Project map
 

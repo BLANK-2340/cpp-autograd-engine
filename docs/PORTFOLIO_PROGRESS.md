@@ -1,5 +1,35 @@
 # Portfolio continuity
 
+## November 3, 2026 — consolidated release verification (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`d0ee06e2bba4f6c8431fc24b1b7337e2448cc6b6`; the release checklist and its CI
+were complete, no portfolio commits had been published today, and no open pull
+requests were present.
+
+### Completed in this session
+
+- Added a canonical release summary binding the portfolio index, dated
+  evidence-health snapshot and release checklist to exact SHA-256 digests and
+  their existing validators.
+- Added one offline command that checks the manifest, hashes and paths, then
+  runs every source validator and self-test without duplicating their schemas.
+- Added five adversarial summary mutations and routed CI and clean-archive
+  verification through the consolidated command.
+
+### Validation and limitations
+
+- The summary detects drift in committed release metadata; it does not perform
+  network health checks or rerun verification inside the other repositories.
+- GPU validation, full-data vision claims and the three inaccessible
+  conditional repositories remain outside the verified portfolio scope.
+
+### Next concrete milestone
+
+Rotate back to a project implementation track: add deterministic top-k and
+confidence-margin inference utilities to `VisionTrack-NN`, with edge-case and
+tie-order tests, while preserving its existing calibrated binary interfaces.
+
 ## November 2, 2026 — release checklist (Asia/Kolkata)
 
 Source of truth before this session: public `main` at

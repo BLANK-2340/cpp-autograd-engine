@@ -1,0 +1,22 @@
+{
+  "artifacts": [
+    {
+      "path": "docs/portfolio.json",
+      "sha256": "5cb0e3082991585870a59ee517afa08cad0264ecbaa5c8848d2c48556ab1280a",
+      "validator": "scripts/validate_portfolio.py"
+    },
+    {
+      "path": "docs/evidence_health.json",
+      "sha256": "e9f1d9399865101f6e381f5295d610cdfc19624d8776e04d26301ec4c52d3ae0",
+      "validator": "scripts/validate_evidence_health.py"
+    },
+    {
+      "path": "docs/release_checklist.json",
+      "sha256": "0be99bd73099c43f5ddff725f33e51aec28582a566e1fb74a5f35bb0df4082ca",
+      "validator": "scripts/validate_release_checklist.py"
+    }
+  ],
+  "generated_on": "2026-11-03",
+  "schema_version": 1,
+  "verification_command": "python3 scripts/verify_portfolio_release.py"
+}
