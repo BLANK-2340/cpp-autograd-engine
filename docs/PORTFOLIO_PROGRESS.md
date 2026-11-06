@@ -1,5 +1,39 @@
 # Portfolio continuity
 
+## November 6, 2026 — refreshed CUDA portfolio evidence (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`81db4c1efc600a4dd02f95e58a5fe87900efd0c9`; no portfolio commits had been
+published today and no open pull requests were present.
+
+### Completed in this session
+
+- Advanced the CUDA evidence anchor to
+  `ce9974174983087641d3f814eab139d451f9101f`, which includes the hash-bound CPU
+  evidence manifest, clean-checkout receipt and strict saved-fingerprint
+  validation completed after the previous portfolio snapshot.
+- Re-audited all four public commit objects, current showcase paths and pinned
+  push-triggered CI runs, refreshing the dated evidence-health snapshot without
+  adding or changing benchmark values.
+- Synchronized the human index, canonical portfolio, release checklist and
+  hash-bound release summary around the refreshed evidence.
+
+### Validation and limitations
+
+- The portfolio checks remain deterministic and offline after this recorded
+  read-only audit; they do not continuously monitor GitHub or rerun checks in
+  the other repositories.
+- Environment fingerprints are descriptive metadata, not hardware
+  authentication or portable performance evidence. NVCC compilation, CUDA
+  device correctness, compute-sanitizer and GPU measurements remain pending.
+
+### Next concrete milestone
+
+Refresh the VisionTrack-NN portfolio anchor to cover ranked inference,
+validation-fixed abstention, deterministic folder reports and labeled-folder
+audits, while keeping full-dataset and performance claims explicitly out of
+scope.
+
 ## November 3, 2026 — consolidated release verification (Asia/Kolkata)
 
 Source of truth before this session: public `main` at

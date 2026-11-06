@@ -24,10 +24,10 @@
       "verify_command": "./scripts/verify_showcase.sh"
     },
     {
-      "evidence_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
-      "evidence_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "evidence_revision": "ce9974174983087641d3f814eab139d451f9101f",
+      "evidence_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/ce9974174983087641d3f814eab139d451f9101f",
       "id": "cuda-kernel-lab",
-      "limitation": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups.",
+      "limitation": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups. Environment fingerprints are descriptive metadata, not hardware authentication or portable performance evidence.",
       "recorded_result": "Reduction: 0.045291 +/- 0.000868 ms allocating and 0.043788 +/- 0.000862 ms preallocated.",
       "repository": "BLANK-2340/cuda-kernel-lab",
       "repository_url": "https://github.com/BLANK-2340/cuda-kernel-lab",

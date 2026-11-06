@@ -1,5 +1,5 @@
 {
-  "checked_on": "2026-11-02",
+  "checked_on": "2026-11-06",
   "projects": [
     {
       "ci": {
@@ -36,26 +36,26 @@
       "evidence_tree": "f8702269a918f694bbdf83a1681ad0610c172eff",
       "project_id": "visiontrack-nn",
       "repository": "BLANK-2340/VisionTrack-NN",
-      "showcase_blob": "ebb3d2219c58b2f5707dfa0c8ddc9b1ef385647c",
+      "showcase_blob": "3f2cd37c9daedee5eb63cbc5560630ef19fbbcc1",
       "showcase_url": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md"
     },
     {
       "ci": {
-        "completed_at": "2026-10-26T14:07:56Z",
+        "completed_at": "2026-11-05T12:53:53Z",
         "conclusion": "success",
         "event": "push",
-        "head_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
-        "run_id": 40336689797,
-        "run_url": "https://github.com/BLANK-2340/cuda-kernel-lab/actions/runs/40336689797",
+        "head_revision": "ce9974174983087641d3f814eab139d451f9101f",
+        "run_id": 42030944082,
+        "run_url": "https://github.com/BLANK-2340/cuda-kernel-lab/actions/runs/42030944082",
         "status": "completed",
         "workflow_name": "CPU references"
       },
-      "commit_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
-      "evidence_revision": "8bdf0620b85e30d6398a0a64627ce9200c62a611",
-      "evidence_tree": "fbe56670b665d21339bda913e71803f1f023dbe5",
+      "commit_url": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/ce9974174983087641d3f814eab139d451f9101f",
+      "evidence_revision": "ce9974174983087641d3f814eab139d451f9101f",
+      "evidence_tree": "20c662c836372ac2257776551d16a99d9ea1680b",
       "project_id": "cuda-kernel-lab",
       "repository": "BLANK-2340/cuda-kernel-lab",
-      "showcase_blob": "327b25135dbf77fb8c01616e8936eb639a681202",
+      "showcase_blob": "6e60e10f395a49a17a860cfa0fe7ac23b1053e45",
       "showcase_url": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md"
     },
     {

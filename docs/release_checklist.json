@@ -20,9 +20,9 @@
     {
       "checks": "./scripts/verify_showcase.sh",
       "demo": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md",
-      "evidence": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/8bdf0620b85e30d6398a0a64627ce9200c62a611",
+      "evidence": "https://github.com/BLANK-2340/cuda-kernel-lab/commit/ce9974174983087641d3f814eab139d451f9101f",
       "id": "cuda-kernel-lab",
-      "limitations": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups.",
+      "limitations": "Scope: allocating and preallocated modes measure different timing boundaries; their ratios are not kernel speedups. Environment fingerprints are descriptive metadata, not hardware authentication or portable performance evidence.",
       "setup": "https://github.com/BLANK-2340/cuda-kernel-lab/blob/main/docs/SHOWCASE.md"
     },
     {
