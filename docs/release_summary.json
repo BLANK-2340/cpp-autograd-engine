@@ -2,21 +2,21 @@
   "artifacts": [
     {
       "path": "docs/portfolio.json",
-      "sha256": "2efb67ef5c97283286ccd2c3d989f4fa3e59b8ca18e086ee275de936c23282b8",
+      "sha256": "192fe9a0f52c21d2ba5797f692d01b4f66d7975cff16bb65aa826e1724abb388",
       "validator": "scripts/validate_portfolio.py"
     },
     {
       "path": "docs/evidence_health.json",
-      "sha256": "a08509b974dd331cd96ef79d31398496e12a01f49ac59f800cb581ecb1b4e0da",
+      "sha256": "012374bdad7b585415079a2c2460bacdda0ee6cf5ef2f613d027b2060c78cba2",
       "validator": "scripts/validate_evidence_health.py"
     },
     {
       "path": "docs/release_checklist.json",
-      "sha256": "3e36a984d5f223e2f53dd95b9960c294819e2bb7aa831fa7328ea2fb09b798c8",
+      "sha256": "7bb7251002d1976a18f3420fc772b73573bb7ee5c467e691c9c32aef578e5946",
       "validator": "scripts/validate_release_checklist.py"
     }
   ],
-  "generated_on": "2026-11-06",
+  "generated_on": "2026-11-09",
   "schema_version": 1,
   "verification_command": "python3 scripts/verify_portfolio_release.py"
 }

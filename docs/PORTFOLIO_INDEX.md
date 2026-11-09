@@ -3,7 +3,7 @@
 This page is the concise entry point for four runnable, evidence-backed projects.
 Each project preserves its original root files and provides a clean-archive
 verification command, architecture notes, measured results and explicit limits.
-The revision links below are evidence anchors verified through November 6, 2026;
+The revision links below are evidence anchors verified through November 9, 2026;
 `main` may continue to evolve.
 
 The canonical [`portfolio.json`](portfolio.json) companion is checked against
@@ -12,7 +12,7 @@ strict schema, unique repositories and revisions, exact GitHub URL construction,
 canonical JSON, and synchronized commands, results and limitations.
 
 The dated [evidence-health audit](EVIDENCE_HEALTH.md) records the commit objects,
-current showcase paths and push-triggered CI runs observed on November 6, 2026.
+current showcase paths and push-triggered CI runs observed on November 9, 2026.
 Its validator is offline; the snapshot never turns normal verification into a
 network-dependent check.
 
@@ -28,7 +28,7 @@ check.
 | Project | Demonstrates | Clean verification | Evidence anchor |
 | --- | --- | --- | --- |
 | [C++ autograd engine](https://github.com/BLANK-2340/cpp-autograd-engine) | Header-only scalar reverse-mode autodiff, deterministic MLP/SGD, dense tensor gradients, stable multiclass loss and versioned checkpoints | `bash scripts/verify_clean_checkout.sh` | [`32e5cdf`](https://github.com/BLANK-2340/cpp-autograd-engine/commit/32e5cdf5a50f91ce12bd187a15b9ab4660cdedf0) |
-| [VisionTrack-NN](https://github.com/BLANK-2340/VisionTrack-NN) | Dependency-light NumPy training, checkpoint/image validation, calibration and controlled Fashion-MNIST subset comparisons | `./scripts/verify_showcase.sh` | [`1267475`](https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01) |
+| [VisionTrack-NN](https://github.com/BLANK-2340/VisionTrack-NN) | Dependency-light NumPy training, checkpoint/image validation, ranked inference, validation-fixed abstention, deterministic folder audits and controlled Fashion-MNIST subset comparisons | `./scripts/verify_showcase.sh` | [`79d1060`](https://github.com/BLANK-2340/VisionTrack-NN/commit/79d1060283a68489f180d28e6f40b859f9f1e9af) |
 | [CUDA kernel lab](https://github.com/BLANK-2340/cuda-kernel-lab) | Checked C++ CPU oracles, caller-owned buffers, hash-bound evidence and reproducibility receipts, normalized environment metadata and optional CUDA kernels | `./scripts/verify_showcase.sh` | [`ce99741`](https://github.com/BLANK-2340/cuda-kernel-lab/commit/ce9974174983087641d3f814eab139d451f9101f) |
 | [Pendulum wave simulation](https://github.com/BLANK-2340/Pendulum-Wave-simulation) | Deterministic nonlinear RK4 simulation, CSV/GIF outputs, convergence evidence and bounded energy-drift measurements | `./scripts/verify_showcase.sh` | [`24be3e3`](https://github.com/BLANK-2340/Pendulum-Wave-simulation/commit/24be3e3b53ff69435bae32c1e4563ab7f8ebb909) |
 
@@ -60,12 +60,17 @@ does not establish real-world generalization, throughput or competitive accuracy
   standard deviation `0.70` percentage points, mean macro F1 `0.723750`.
 - Equal-parameter grid/global comparison on the same fixed subset: mean accuracy
   `72.67%` versus `36.00%`; paired difference `+36.67` percentage points.
+- The pinned revision adds deterministic top-k ranking, applies a threshold
+  selected only on validation data, and audits frozen policies on labeled
+  folders with explicit null risk when no samples are accepted.
 - [Architecture, protocols and narrower limits](https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md)
 
 Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official
-train/test sets. The comparison is parameter matched but not compute matched and
-is not a pooling-only causal ablation. No GPU, latency or state-of-the-art claim
-is made.
+train/test sets. Ranked confidence and validation-fixed abstention are
+descriptive; the audit set must not refit the threshold, and small per-class
+supports can be unstable. The comparison is parameter matched but not compute
+matched and is not a pooling-only causal ablation. No GPU, latency or
+state-of-the-art claim is made.
 
 ### CUDA kernel lab
 

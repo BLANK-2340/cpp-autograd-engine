@@ -12,9 +12,9 @@
     {
       "checks": "./scripts/verify_showcase.sh",
       "demo": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md",
-      "evidence": "https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01",
+      "evidence": "https://github.com/BLANK-2340/VisionTrack-NN/commit/79d1060283a68489f180d28e6f40b859f9f1e9af",
       "id": "visiontrack-nn",
-      "limitations": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets.",
+      "limitations": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets. Ranked confidence and validation-fixed abstention are descriptive; the audit set must not refit the threshold, and small per-class supports can be unstable.",
       "setup": "https://github.com/BLANK-2340/VisionTrack-NN/blob/main/docs/SHOWCASE.md"
     },
     {

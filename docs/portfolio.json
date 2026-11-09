@@ -13,10 +13,10 @@
       "verify_command": "bash scripts/verify_clean_checkout.sh"
     },
     {
-      "evidence_revision": "12674754043ee6e7b097a549078736b5f913be01",
-      "evidence_url": "https://github.com/BLANK-2340/VisionTrack-NN/commit/12674754043ee6e7b097a549078736b5f913be01",
+      "evidence_revision": "79d1060283a68489f180d28e6f40b859f9f1e9af",
+      "evidence_url": "https://github.com/BLANK-2340/VisionTrack-NN/commit/79d1060283a68489f180d28e6f40b859f9f1e9af",
       "id": "visiontrack-nn",
-      "limitation": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets.",
+      "limitation": "Scope: Fashion-MNIST figures use fixed balanced subsets, not the full official train/test sets. Ranked confidence and validation-fixed abstention are descriptive; the audit set must not refit the threshold, and small per-class supports can be unstable.",
       "recorded_result": "Three-seed spatial Fashion-MNIST subset suite: mean accuracy 72.67%, sample standard deviation 0.70 percentage points, mean macro F1 0.723750.",
       "repository": "BLANK-2340/VisionTrack-NN",
       "repository_url": "https://github.com/BLANK-2340/VisionTrack-NN",

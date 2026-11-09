@@ -1,5 +1,36 @@
 # Portfolio continuity
 
+## November 9, 2026 — refreshed VisionTrack-NN evidence (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`3f2b968d4974cdfbd62b9cb2bee8f3ff14d9e2cf`; no task commits had been published
+today and no open pull requests were present.
+
+### Completed in this session
+
+- Advanced the VisionTrack-NN evidence anchor to
+  `79d1060283a68489f180d28e6f40b859f9f1e9af`, covering deterministic ranked
+  inference, validation-fixed abstention, policy-aware folder inference and the
+  labeled-folder policy audit completed after the previous portfolio snapshot.
+- Re-audited all four public commit objects, current showcase paths and pinned
+  successful push workflows as a November 9 evidence-health snapshot.
+- Synchronized the human index, canonical portfolio, release checklist and
+  hash-bound release summary without adding or changing measured results.
+
+### Validation and limitations
+
+- The audit remains a dated observation; all committed validators are offline
+  and do not continuously monitor GitHub or rerun another repository's checks.
+- Ranked probabilities and confidence margins are descriptive. The abstention
+  threshold is selected on validation data and must remain frozen for folder
+  audits; small per-class supports can produce unstable estimates.
+
+### Next concrete milestone
+
+Rotate to VisionTrack-NN and bind a frozen policy-audit report to exact
+checkpoint, policy and labeled-input identities with strict offline validation
+and corruption tests, without claiming new accuracy or performance results.
+
 ## November 6, 2026 — refreshed CUDA portfolio evidence (Asia/Kolkata)
 
 Source of truth before this session: public `main` at
