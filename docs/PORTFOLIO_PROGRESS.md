@@ -1,5 +1,36 @@
 # Portfolio continuity
 
+## November 10, 2026 — atomic classifier checkpoint saves (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`d15bb4a48c0cde8ecb01662f785fbe8bc24e876c`; its atomic MLP checkpoint commit
+and push workflow had passed, one of today's two planned commits was published,
+and no open pull requests were present.
+
+### Completed in this session
+
+- Applied the opt-in atomic path contract to versioned linear-classifier
+  checkpoints while preserving the existing stream, string and numeric format.
+- Loaded the published path and proved that 120 training steps, the path
+  checkpoint and 180 resumed steps exactly match the established uninterrupted
+  300-step parameters and loss trajectory.
+- Covered canonical bytes, successful overwrite, invalid-model write failure,
+  injected replacement failure and temporary-file cleanup.
+
+### Validation and limitations
+
+- Atomic publication relies on the shared single-writer, same-directory rename
+  contract. It does not add optimizer state, authentication, checksums,
+  inter-process locking or `fsync`-based crash durability.
+- The exact continuation result remains scoped to the deterministic same-build
+  full-batch stateless-SGD example.
+
+### Next concrete milestone
+
+Rotate to VisionTrack-NN and add opt-in atomic checkpoint/report publication for
+task-owned inference artifacts only where it preserves canonical JSON and NumPy
+formats, with failure-injection tests and no new model-quality claims.
+
 ## November 10, 2026 — atomic MLP checkpoint saves (Asia/Kolkata)
 
 Source of truth before this session: public `main` at

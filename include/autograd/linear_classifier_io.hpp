@@ -1,7 +1,9 @@
 #pragma once
 
+#include "autograd/atomic_file.hpp"
 #include <cmath>
 #include <cstddef>
+#include <filesystem>
 #include <iomanip>
 #include <istream>
 #include <limits>
@@ -110,6 +112,16 @@ inline std::string serialize_linear_classifier(const LinearClassifierModel& mode
 inline LinearClassifierModel deserialize_linear_classifier(const std::string& text) {
     std::istringstream input(text);
     return load_linear_classifier(input);
+}
+
+// Opt-in path persistence. The version-1 stream is written completely to a
+// sibling temporary file before same-directory replacement is attempted.
+inline void save_linear_classifier_atomic(
+    const std::filesystem::path& destination,
+    const LinearClassifierModel& model) {
+    atomic_write_file(destination, [&](std::ostream& output) {
+        save_linear_classifier(output, model);
+    });
 }
 
 } // namespace autograd

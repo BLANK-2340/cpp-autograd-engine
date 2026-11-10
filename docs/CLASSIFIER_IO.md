@@ -15,6 +15,18 @@ The stream APIs are `save_linear_classifier` and `load_linear_classifier`.
 `linear_classifier_io_demo` trains the synthetic classifier, round-trips it in
 memory, resumes from the restored numeric parameters and verifies the result.
 
+For opt-in path persistence that never exposes a partially written checkpoint:
+
+```cpp
+autograd::save_linear_classifier_atomic("classifier.aglc", model);
+```
+
+The helper writes the unchanged version-1 stream to `classifier.aglc.tmp`,
+flushes and closes it, then attempts a same-directory rename. Serialization or
+replacement failure leaves an existing destination unchanged and removes the
+temporary file. The tests load the published path and prove the same exact
+120-step checkpoint plus 180-step continuation contract described below.
+
 ## Deterministic resume contract
 
 `multiclass_demo::continue_training(parameters, steps, learning_rate)` starts a
@@ -46,5 +58,9 @@ dimensions, count mismatches, nonfinite or truncated parameters, trailing data
 and models above 10,000,000 parameters before allocating the parameter vector.
 
 This educational checkpoint is not a general model-interchange standard. It has
-no checksum, authentication, optimizer state or atomic file-replacement helper;
-callers remain responsible for trusted storage and safe file replacement.
+no checksum, authentication or optimizer state. The atomic helper assumes one
+writer per destination and relies on host same-directory rename semantics. It
+does not provide process locking, `fsync`-based crash durability or a guarantee
+that every platform can replace an existing file by rename; unsupported
+replacement fails while preserving the old checkpoint. Callers remain
+responsible for trusted storage and permissions.

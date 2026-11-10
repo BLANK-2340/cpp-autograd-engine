@@ -2,6 +2,8 @@
 #include "../examples/multiclass_training.hpp"
 
 #include <cmath>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -108,6 +110,82 @@ void malformed_inputs() {
     });
 }
 
+std::string read_file(const std::filesystem::path& path) {
+    std::ifstream input(path, std::ios::binary);
+    if (!input) throw std::runtime_error("Unable to read classifier test checkpoint");
+    return std::string(std::istreambuf_iterator<char>(input),
+                       std::istreambuf_iterator<char>());
+}
+
+void atomic_path_save_and_resume() {
+    const std::filesystem::path directory =
+        std::filesystem::temp_directory_path() / "autograd-classifier-io-test";
+    std::filesystem::remove_all(directory);
+    std::filesystem::create_directories(directory);
+    const std::filesystem::path checkpoint = directory / "classifier.aglc";
+    const std::filesystem::path temporary = checkpoint.string() + ".tmp";
+
+    const auto uninterrupted = multiclass_demo::train(300, 0.2);
+    const auto first_segment = multiclass_demo::train(120, 0.2);
+    const autograd::LinearClassifierModel first{2, 3, first_segment.parameters};
+    autograd::save_linear_classifier_atomic(checkpoint, first);
+    require(read_file(checkpoint) == autograd::serialize_linear_classifier(first),
+            "Atomic classifier save changed canonical bytes");
+    require(!std::filesystem::exists(temporary),
+            "Successful classifier save left a temporary file");
+
+    std::ifstream input(checkpoint, std::ios::binary);
+    const auto restored = autograd::load_linear_classifier(input);
+    const auto second_segment = multiclass_demo::continue_training(
+        restored.parameters, 180, 0.2);
+    std::vector<double> resumed_losses = first_segment.losses;
+    resumed_losses.insert(resumed_losses.end(), second_segment.losses.begin() + 1,
+                          second_segment.losses.end());
+    require(second_segment.parameters == uninterrupted.parameters &&
+                resumed_losses == uninterrupted.losses,
+            "Atomic classifier checkpoint changed exact resume behavior");
+
+    const autograd::LinearClassifierModel replacement{2, 3,
+                                                       uninterrupted.parameters};
+    autograd::save_linear_classifier_atomic(checkpoint, replacement);
+    const std::string published = autograd::serialize_linear_classifier(replacement);
+    require(read_file(checkpoint) == published,
+            "Atomic classifier replacement published incorrect bytes");
+
+    autograd::LinearClassifierModel invalid = replacement;
+    invalid.parameters.pop_back();
+    bool write_failed = false;
+    try {
+        autograd::save_linear_classifier_atomic(checkpoint, invalid);
+    } catch (const std::invalid_argument&) {
+        write_failed = true;
+    }
+    require(write_failed, "Invalid classifier path save was accepted");
+    require(read_file(checkpoint) == published &&
+                !std::filesystem::exists(temporary),
+            "Failed classifier write changed the destination or left a temporary");
+
+    bool replacement_failed = false;
+    try {
+        autograd::atomic_file_detail::write_file(
+            checkpoint,
+            [&](std::ostream& output) {
+                autograd::save_linear_classifier(output, first);
+            },
+            [](const std::filesystem::path&, const std::filesystem::path&) {
+                throw std::runtime_error("injected classifier replacement failure");
+            });
+    } catch (const std::runtime_error&) {
+        replacement_failed = true;
+    }
+    require(replacement_failed, "Injected classifier replacement failure was not reported");
+    require(read_file(checkpoint) == published &&
+                !std::filesystem::exists(temporary),
+            "Failed classifier replacement changed the destination or left a temporary");
+
+    std::filesystem::remove_all(directory);
+}
+
 } // namespace
 
 int main() {
@@ -115,6 +193,8 @@ int main() {
     trained_prediction_round_trip();
     exact_resume_training();
     malformed_inputs();
+    atomic_path_save_and_resume();
     std::cout << "PASS: exact classifier checkpoint round trips, prediction preservation, "
-                 "resume equivalence, and malformed input rejection\n";
+                 "resume equivalence, atomic path failure safety, and malformed input "
+                 "rejection\n";
 }
