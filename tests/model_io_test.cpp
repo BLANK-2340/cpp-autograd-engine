@@ -1,5 +1,7 @@
 #include "autograd/model_io.hpp"
 #include <cmath>
+#include <filesystem>
+#include <fstream>
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -76,11 +78,76 @@ void malformed_inputs() {
     too_many += "\nparameters 0\nend\n";
     rejects([&] { (void)autograd::deserialize_model(too_many); });
 }
+
+std::string read_file(const std::filesystem::path& path) {
+    std::ifstream input(path, std::ios::binary);
+    if (!input) throw std::runtime_error("Unable to read test checkpoint");
+    return std::string(std::istreambuf_iterator<char>(input),
+                       std::istreambuf_iterator<char>());
+}
+
+void atomic_path_save() {
+    const std::filesystem::path directory =
+        std::filesystem::temp_directory_path() / "autograd-model-io-test";
+    std::filesystem::remove_all(directory);
+    std::filesystem::create_directories(directory);
+    const std::filesystem::path checkpoint = directory / "model.agmlp";
+    const std::filesystem::path temporary = checkpoint.string() + ".tmp";
+
+    autograd::MLP first({2, 3, 1}, 7);
+    autograd::save_model_atomic(checkpoint, first);
+    require(read_file(checkpoint) == autograd::serialize_model(first),
+            "Atomic path save changed canonical bytes");
+    require(!std::filesystem::exists(temporary),
+            "Successful atomic save left a temporary file");
+
+    autograd::MLP replacement({2, 4, 1}, 42);
+    autograd::save_model_atomic(checkpoint, replacement);
+    require(read_file(checkpoint) == autograd::serialize_model(replacement),
+            "Atomic replacement did not publish the new model");
+
+    bool replacement_failed = false;
+    try {
+        autograd::atomic_file_detail::write_file(
+            checkpoint,
+            [](std::ostream& output) { output << "unpublished replacement\n"; },
+            [](const std::filesystem::path&, const std::filesystem::path&) {
+                throw std::runtime_error("injected replacement failure");
+            });
+    } catch (const std::runtime_error&) {
+        replacement_failed = true;
+    }
+    require(replacement_failed, "Injected replacement failure was not reported");
+    require(read_file(checkpoint) == autograd::serialize_model(replacement),
+            "Failed replacement changed the published checkpoint");
+    require(!std::filesystem::exists(temporary),
+            "Failed replacement left a temporary file");
+
+    {
+        std::ofstream stale(temporary, std::ios::binary);
+        stale << "owned by another writer\n";
+    }
+    bool collision_rejected = false;
+    try {
+        autograd::save_model_atomic(checkpoint, first);
+    } catch (const std::runtime_error&) {
+        collision_rejected = true;
+    }
+    require(collision_rejected, "Existing temporary file was overwritten");
+    require(read_file(temporary) == "owned by another writer\n",
+            "Temporary-file collision changed foreign data");
+    require(read_file(checkpoint) == autograd::serialize_model(replacement),
+            "Temporary-file collision changed the published checkpoint");
+
+    std::filesystem::remove_all(directory);
+}
 } // namespace
 
 int main() {
     exact_round_trip();
     malformed_inputs();
+    atomic_path_save();
     std::cout << "PASS: exact model round trips, canonical output, prediction preservation, "
-                 "stream API, malformed and oversized input rejection\n";
+                 "stream API, atomic path replacement, failure safety, and malformed input "
+                 "rejection\n";
 }

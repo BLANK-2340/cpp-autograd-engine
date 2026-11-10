@@ -23,6 +23,18 @@ String helpers `serialize_model` and `deserialize_model` are also available.
 Run `./build/model_io_demo`, or use `bash scripts/check.sh` to build and run
 the complete suite.
 
+For an opt-in path save that does not expose a partially written checkpoint:
+
+```cpp
+autograd::save_model_atomic("model.agmlp", model);
+```
+
+This writes `model.agmlp.tmp` in the destination directory, flushes and closes
+the complete versioned stream, then renames it over the destination. A write or
+replacement failure leaves an existing destination unchanged and removes the
+temporary file. An already present `.tmp` sibling is rejected rather than
+overwritten, so callers can investigate or recover it.
+
 ## Format contract
 
 Version 1 is a whitespace-delimited, locale-independent text format:
@@ -52,7 +64,10 @@ hostile inputs.
 This is a reproducibility checkpoint for the educational CPU MLP. It is not a
 general interchange standard and has no backward-compatibility promise beyond
 explicitly supported versions. It does not preserve optimizer state, tape graphs,
-gradients, metadata or checksums. Callers remain responsible for secure file
-permissions, storage integrity and atomic filesystem replacement when saving to
-disk.
+gradients, metadata or checksums. The atomic helper assumes a single writer for
+each destination and relies on the host filesystem's same-directory rename
+semantics; it does not fsync file or directory metadata, coordinate processes or
+guarantee crash durability. On platforms that cannot replace an existing file by
+rename, overwriting fails safely and the old checkpoint remains. Callers remain
+responsible for secure file permissions and storage integrity.
 

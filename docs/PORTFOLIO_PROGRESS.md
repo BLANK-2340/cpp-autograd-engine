@@ -1,5 +1,36 @@
 # Portfolio continuity
 
+## November 10, 2026 — atomic MLP checkpoint saves (Asia/Kolkata)
+
+Source of truth before this session: public `main` at
+`6bb9bc1a46eee65210d2d5009078f1c1fd406560`; no authorized repository had a
+commit in today's Kolkata date window and no open pull requests were present.
+
+### Completed in this session
+
+- Added an opt-in path API that writes the unchanged version-1 MLP stream to a
+  sibling temporary file and publishes it with same-directory rename only after
+  a successful flush and close.
+- Preserved the existing stream and string serialization APIs and their exact
+  numeric format.
+- Added exact-byte round-trip and overwrite checks plus injected replacement
+  failure, cleanup and stale-temporary collision coverage.
+
+### Validation and limitations
+
+- The helper is intentionally single-writer and depends on host rename
+  semantics. It does not provide inter-process locking, checksums, `fsync`-based
+  crash durability or a portable guarantee that an existing destination can be
+  replaced on every filesystem.
+- Failed writes and replacements leave an existing published checkpoint
+  unchanged; an existing `.tmp` sibling is never overwritten.
+
+### Next concrete milestone
+
+Apply the same opt-in atomic path contract to versioned linear-classifier
+checkpoints, with exact continuation and failed-replacement tests, while keeping
+the established stream format and resume semantics unchanged.
+
 ## November 9, 2026 — refreshed VisionTrack-NN evidence (Asia/Kolkata)
 
 Source of truth before this session: public `main` at

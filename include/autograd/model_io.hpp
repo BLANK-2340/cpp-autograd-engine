@@ -1,6 +1,8 @@
 #pragma once
 
+#include "autograd/atomic_file.hpp"
 #include "autograd/mlp.hpp"
+#include <filesystem>
 #include <iomanip>
 #include <istream>
 #include <limits>
@@ -99,6 +101,15 @@ inline std::string serialize_model(const MLP& model) {
 inline MLP deserialize_model(const std::string& text) {
     std::istringstream input(text);
     return load_model(input);
+}
+
+// Writes a sibling <destination>.tmp file and renames it only after the
+// complete versioned checkpoint has been flushed and closed. Existing stream
+// and string APIs retain their original behavior.
+inline void save_model_atomic(const std::filesystem::path& destination,
+                              const MLP& model) {
+    atomic_write_file(destination,
+                      [&](std::ostream& output) { save_model(output, model); });
 }
 
 } // namespace autograd
